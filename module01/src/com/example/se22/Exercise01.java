@@ -11,6 +11,7 @@ public class Exercise01 {
 				   "ankara", 312,
 				   "istanbul-avrupa", 212
 				);
+		areaCodes.put("izmir", 432);
 		// unnamed variables
 		areaCodes.forEach((city,_) -> {
 			try {
