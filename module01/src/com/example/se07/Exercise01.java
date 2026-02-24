@@ -19,7 +19,7 @@ public class Exercise01 {
 		System.out.println("z: %x - hexadecimal".formatted(z));
 		int n = 0b1011_1100;
 		int money = 1_000_000_000;
-		System.out.println("n: %b - boolean".formatted(n)); // ?
+		System.out.println("n: %s - binary".formatted(Integer.toBinaryString(n))); // ?
 		System.out.println("n: %x - hexadecimal".formatted(n));
 	}
 
