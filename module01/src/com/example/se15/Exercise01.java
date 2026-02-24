@@ -2,6 +2,7 @@ package com.example.se15;
 
 public class Exercise01 {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		var p1 = new Point(2.0);
 

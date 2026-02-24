@@ -3,6 +3,7 @@ package com.example.se17;
 import java.util.List;
 
 public class Exercise01 {
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
         var zoo = List.of(
         		new Spider(),
@@ -13,9 +14,16 @@ public class Exercise01 {
         		new Fish()
         	);
         for (var animal : zoo) {
-        	   if (animal instanceof Pet) {
-        	    		var pet = (Pet) animal;
+        	   if (animal instanceof Pet pet && pet.metric() > 4) {
+        	    		// var pet = (Pet) animal;
         	    		pet.play();
+        	   }
+        	   switch(animal) {
+        	      case null -> {}
+        	      case Cat cat when cat.getLegs() == 4 -> {}
+        	      case Spider spider -> {}
+        	      case Fish fish -> {}
+        	      default -> {}
         	   }
         }
 	}
@@ -28,6 +36,7 @@ sealed abstract class Animal permits Spider, Cat, Fish {
 interface Pet {
 	default void play() {
 	}
+	default int metric() { return 42;}
 }
 
 // Solution Class

@@ -8,3 +8,14 @@ public class Exercise01 {
 	}
 
 }
+
+abstract class Shape {
+	public Shape(double edge) {}
+}
+
+class Square extends Shape {
+	public Square(double edge) {
+		if (edge<= 0) throw new IllegalArgumentException("bad value!");
+		super(edge);
+	}
+}
