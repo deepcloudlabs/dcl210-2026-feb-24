@@ -1,4 +1,4 @@
-Legacy Java SE 7 Language Kata (refactor to Java 8 → 25)
+Legacy Java SE 7 Language Refactoring Kata (refactor to Java 8 → 25)
 ======================================================
 
 This is a single-module Java SE 7 codebase designed as a refactoring kata.
