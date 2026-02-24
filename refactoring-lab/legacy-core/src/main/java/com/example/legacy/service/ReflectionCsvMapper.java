@@ -18,7 +18,7 @@ public class ReflectionCsvMapper {
             String header = br.readLine();
             if (header == null) return Collections.emptyList();
             String[] headers = header.split(",");
-            Map indexByName = new HashMap(); // raw on purpose
+            Map indexByName = new HashMap(); 
             for (int i = 0; i < headers.length; i++) {
                 indexByName.put(headers[i].trim(), Integer.valueOf(i));
             }

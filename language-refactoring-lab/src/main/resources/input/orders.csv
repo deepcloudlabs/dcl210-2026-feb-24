@@ -1,0 +1,5 @@
+order_id,customer_id,customer_name,tier,payment,item_sku,item_qty,item_unit_price_cents,status
+O-1001,C-1,Ada Lovelace,GOLD,CARD:1234,SKU-ALPHA,1,15000,PAID
+O-1002,C-2,Alan Turing,STANDARD,WIRE:TR000000000000000000000000,SKU-BETA,2,6000,PAID
+O-1003,C-3,Grace Hopper,SILVER,CASH,SKU-GAMMA,4,1000,NEW
+O-1004,C-4,Joan Clarke,GOLD,CARD:5678,SKU-DELTA,1,50000,PAID
