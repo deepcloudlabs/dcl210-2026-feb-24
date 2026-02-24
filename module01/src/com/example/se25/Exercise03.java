@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class Exercise03 {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws IOException {
 		List<Integer> list;
 		Map<String,String> map;
