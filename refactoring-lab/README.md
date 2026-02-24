@@ -1,4 +1,4 @@
-Legacy Java SE 7 Refactor Lab
+Legacy Java SE 7 Refactoring Lab
 ============================
 
 Purpose
