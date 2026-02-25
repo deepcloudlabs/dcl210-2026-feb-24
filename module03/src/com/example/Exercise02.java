@@ -5,7 +5,6 @@ import java.util.Set;
 
 public class Exercise02 {
 
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		// Ordered, allows duplicates
 		//List<Integer> numbers = new ArrayList<>();
