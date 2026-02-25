@@ -2,7 +2,6 @@ package com.example.service;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.IntStream;
 
 public class RandomNumberService {
 	public static void generate(Object o) {
