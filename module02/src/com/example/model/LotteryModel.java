@@ -6,9 +6,9 @@ import com.example.service.OrderType;
 import com.example.service.Ordered;
 import com.example.service.RandomNumber;
 
-@Ordered(OrderType.ASC)
+@Ordered(OrderType.DESC)
 public class LotteryModel {
-	@RandomNumber(sorted = true,distinct = false,size=16)
+	@RandomNumber(sorted = true,distinct = true,size=16)
 	private List<Integer> numbers;
 
 	public void setNumbers(List<Integer> numbers) {
