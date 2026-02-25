@@ -10,7 +10,7 @@ import com.example.service.business.StandardCalculator;
 public class CalculatorApplication {
 
 	public static void main(String[] args) {
-		Calculator calculator = new StandardCalculator();
+		StandardCalculator calculator = new StandardCalculator();
 		var clazz = calculator.getClass();
 		var proxy = (Calculator) Proxy.newProxyInstance(
 				clazz.getClassLoader(), 
@@ -20,11 +20,12 @@ public class CalculatorApplication {
 				clazz.getClassLoader(), 
 				clazz.getInterfaces(), 
 				new AuditingHandler(proxy));
+		calculator.setProxy(proxy);
 		System.err.println(proxy.getClass());
-		System.err.println("4+7=%f".formatted(proxy.add(4, 7)));	
-		System.err.println("4-7=%f".formatted(proxy.sub(4, 7)));	
+		//System.err.println("4+7=%f".formatted(proxy.add(4, 7)));	
+		//System.err.println("4-7=%f".formatted(proxy.sub(4, 7)));	
 		System.err.println("4*7=%f".formatted(proxy.mul(4, 7)));	
-		System.err.println("4/7=%f".formatted(proxy.div(4, 7)));	
+		//System.err.println("4/7=%f".formatted(proxy.div(4, 7)));	
 	}
 
 }
