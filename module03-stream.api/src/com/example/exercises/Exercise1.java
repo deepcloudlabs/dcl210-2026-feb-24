@@ -32,8 +32,7 @@ public class Exercise1 {
         for (var movie : movies) {
            	// external loop
         	    for (var director: movie.getDirectors()) {
-        	    		directorMovieCount.putIfAbsent(director, 0L);
-        	    		directorMovieCount.put(director, directorMovieCount.get(director)+1);
+        	    	    directorMovieCount.merge(director, 1L, Long::sum);
         	    }
         }
         // external loop
