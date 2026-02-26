@@ -4,14 +4,22 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.IntStream;
 
-import com.example.jmx.RmiQualitySamplerMXBean;
 import com.example.jmx.QualityMetric;
+import com.example.jmx.RmiQualitySamplerMXBean;
 import com.example.model.LotteryModel;
 import com.example.service.LotteryService;
 import com.example.service.PoorResponseTimeObservable;
 import com.example.service.RandomNumberService;
+
+import jdk.jfr.Category;
+import jdk.jfr.Description;
+import jdk.jfr.Enabled;
+import jdk.jfr.Event;
+import jdk.jfr.Label;
+import jdk.jfr.Name;
 
 public class StandardLotteryService extends UnicastRemoteObject implements LotteryService, RmiQualitySamplerMXBean {
 	private int counter;
@@ -39,8 +47,14 @@ public class StandardLotteryService extends UnicastRemoteObject implements Lotte
 		totalResponseTime += stop - start;
 		averageResponseTime = (double) totalResponseTime / counter;
 		if (averageResponseTime > 5) {
+			var event = new LotteryEvent();
+			event.begin();
 			poorResponseTimeObservable.changed();
 			poorResponseTimeObservable.notifyObservers(getQualityMetric());
+			event.counter = counter;
+			event.averageResponseTime = averageResponseTime;
+			event.end();
+			event.commit();
 		}
 		return numbers;
 	}
@@ -59,3 +73,13 @@ public class StandardLotteryService extends UnicastRemoteObject implements Lotte
 
 }
 
+@Enabled
+@Category("Response Time Event")
+@Description("This is a poor response time event")
+@Label("Poor Response Time Event")
+@Name("com.example.service.business.LotteryEvent")
+class LotteryEvent extends Event {
+	String id = UUID.randomUUID().toString();
+	int counter;
+	double averageResponseTime;
+}
