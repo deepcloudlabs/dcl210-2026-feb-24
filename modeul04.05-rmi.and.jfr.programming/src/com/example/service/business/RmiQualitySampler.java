@@ -1,56 +1,48 @@
 package com.example.service.business;
 
-import java.util.Observable;
-import java.util.Observer;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicLong;
 
 import javax.management.MBeanNotificationInfo;
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 
-import com.example.jmx.RmiQualitySamplerMXBean;
 import com.example.jmx.QualityMetric;
+import com.example.jmx.RmiQualitySamplerMXBean;
 
-@SuppressWarnings("deprecation")
-public class RmiQualitySampler extends NotificationBroadcasterSupport 
-          implements RmiQualitySamplerMXBean, Observer {
-	private static final String QOS_VIOLATION_EVENT = "com.example.service.business.RmiQualitySampler.QOS_VIOLATION_EVENT";
-	private final StandardLotteryService standardLotteryService;
-	private int sequence;
+public class RmiQualitySampler extends NotificationBroadcasterSupport implements RmiQualitySamplerMXBean {
+	private static final String NOTIFICATION_TYPE = "com.example.qos.performance.violation";
+	private final StandardLotteryService lotteryService;
+	private final AtomicLong sequenceNumber = new AtomicLong(1);
 
 	public RmiQualitySampler(StandardLotteryService standardLotteryService) {
-		this.standardLotteryService = standardLotteryService;
+		this.lotteryService = Objects.requireNonNull(standardLotteryService, "Lottery service cannot be null");
+		this.lotteryService.addPerformanceListener(this::handlePerformanceViolation);
 	}
 
-	@Override
-	public void update(Observable o, Object metric) {
-		QualityMetric qualityMetric = (QualityMetric) metric;
-		sequence++;
-		var notification = new Notification(
-				"Poor Average Response Time Performance", 
-				sequence,
-				System.currentTimeMillis(),
-				"Poor average response time: %f".formatted(qualityMetric.getAverageResponseTime()));
+	private void handlePerformanceViolation(QualityMetric metric) {
+		String message = String.format("Performance Warning: Average response time reached %.2f ms",
+				metric.getAverageResponseTime());
+		Notification notification = new Notification(NOTIFICATION_TYPE, this, sequenceNumber.getAndIncrement(),
+				System.currentTimeMillis(), message);
 		sendNotification(notification);
 	}
 
 	@Override
 	public MBeanNotificationInfo[] getNotificationInfo() {
-		String[] types = {QOS_VIOLATION_EVENT};
-		String name = Notification.class.getName();
-		String description = "Poor average response time";
-		var notificationInfo = new MBeanNotificationInfo(types, name, description);
-		return new MBeanNotificationInfo[] {notificationInfo};
+		return new MBeanNotificationInfo[] { new MBeanNotificationInfo(new String[] { NOTIFICATION_TYPE },
+				Notification.class.getName(), "Notifications emitted when average response time exceeds thresholds") };
 	}
 
 	@Override
 	public void reset() {
-		this.standardLotteryService.reset();
+		this.lotteryService.reset();
 
 	}
 
 	@Override
 	public QualityMetric getQualityMetric() {
-		return this.standardLotteryService.getQualityMetric();
+		return this.lotteryService.getQualityMetric();
 	}
 
 }
