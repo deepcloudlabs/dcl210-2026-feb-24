@@ -10,6 +10,9 @@ public class LotteryServerApplication {
 
 	public static void main(String[] args) throws RemoteException {
 		// rmiregistry -> JDK
+		// D:\var\repositories\dcl210-2026-feb-24\modeul04-rmi.programming\bin
+		// rmiregistry 2026
+		// 
 		var lotteryService = new StandardLotteryService();
 		Registry registry = LocateRegistry.getRegistry(2026);
 		registry.rebind("remote/StandardLotteryService", lotteryService);
