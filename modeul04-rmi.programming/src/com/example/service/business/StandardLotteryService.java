@@ -40,6 +40,8 @@ public class StandardLotteryService extends UnicastRemoteObject implements Lotte
 	@Override
 	public List<LotteryModel> draw(int column) throws RemoteException {
 		counter++;
+		var event = new LotteryEvent();
+		event.begin();
 		var start = System.nanoTime();
 		List<LotteryModel> numbers = IntStream.range(0, column)
 				.mapToObj(_ -> (LotteryModel) RandomNumberService.generate(new LotteryModel())).toList();
@@ -47,8 +49,6 @@ public class StandardLotteryService extends UnicastRemoteObject implements Lotte
 		totalResponseTime += stop - start;
 		averageResponseTime = (double) totalResponseTime / counter;
 		if (averageResponseTime > 5) {
-			var event = new LotteryEvent();
-			event.begin();
 			poorResponseTimeObservable.changed();
 			poorResponseTimeObservable.notifyObservers(getQualityMetric());
 			event.counter = counter;
