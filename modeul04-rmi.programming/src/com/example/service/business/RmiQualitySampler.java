@@ -10,6 +10,7 @@ import javax.management.NotificationBroadcasterSupport;
 import com.example.jmx.RmiQualitySamplerMXBean;
 import com.example.jmx.QualityMetric;
 
+@SuppressWarnings("deprecation")
 public class RmiQualitySampler extends NotificationBroadcasterSupport 
           implements RmiQualitySamplerMXBean, Observer {
 	private static final String QOS_VIOLATION_EVENT = "com.example.service.business.RmiQualitySampler.QOS_VIOLATION_EVENT";
