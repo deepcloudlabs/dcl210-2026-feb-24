@@ -45,10 +45,13 @@ public class Exercise1 {
         // Higher-Order Function: functions accept parameters as function
         // MapReduce Framework: filter, map, reduce, flatMap, distinct, min, max, count, collect,...
         // immutability, function chain (design): HoF -> pipeline (runtime): stream
+        // lazy stream
+        // parallel stream -> ForkJoin Framework (java se 7)
         Map<Director, Long> directorMovieFunctionalCount = 
         // internal loop		
         movies              							    // Collection<Movie> 
               .stream()     								// Stream<Movie>
+              .parallel()
               .map(Movie::getDirectors)                  // Stream<List<Director>>
               .flatMap(List::stream)  				    // Stream<Director>
               .collect(groupingBy(identity(),counting())); // Map<Director,Long>
