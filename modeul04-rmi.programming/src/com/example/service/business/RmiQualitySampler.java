@@ -7,11 +7,11 @@ import javax.management.MBeanNotificationInfo;
 import javax.management.Notification;
 import javax.management.NotificationBroadcasterSupport;
 
-import com.example.jmx.ProfilingMBean;
+import com.example.jmx.RmiQualitySamplerMXBean;
 import com.example.jmx.QualityMetric;
 
 public class RmiQualitySampler extends NotificationBroadcasterSupport 
-          implements ProfilingMBean, Observer {
+          implements RmiQualitySamplerMXBean, Observer {
 	private static final String QOS_VIOLATION_EVENT = "com.example.service.business.RmiQualitySampler.QOS_VIOLATION_EVENT";
 	private final StandardLotteryService standardLotteryService;
 	private int sequence;

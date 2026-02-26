@@ -1,6 +1,6 @@
 package com.example.jmx;
 
-public interface ProfilingMBean {
+public interface RmiQualitySamplerMXBean {
 	void reset();
 	QualityMetric getQualityMetric();
 }

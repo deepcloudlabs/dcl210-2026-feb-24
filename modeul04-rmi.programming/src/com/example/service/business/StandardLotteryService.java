@@ -6,14 +6,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import com.example.jmx.ProfilingMBean;
+import com.example.jmx.RmiQualitySamplerMXBean;
 import com.example.jmx.QualityMetric;
 import com.example.model.LotteryModel;
 import com.example.service.LotteryService;
 import com.example.service.PoorResponseTimeObservable;
 import com.example.service.RandomNumberService;
 
-public class StandardLotteryService extends UnicastRemoteObject implements LotteryService, ProfilingMBean {
+public class StandardLotteryService extends UnicastRemoteObject implements LotteryService, RmiQualitySamplerMXBean {
 	private int counter;
 	private int totalResponseTime;
 	private double averageResponseTime = Double.NaN;
