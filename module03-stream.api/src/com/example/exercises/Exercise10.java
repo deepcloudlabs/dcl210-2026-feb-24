@@ -8,6 +8,7 @@ import com.example.dao.WorldDao;
  * @author Binnur Kurt <binnur.kurt@gmail.com>
  *
  */
+@SuppressWarnings("unused")
 public class Exercise10 {
 	private static final WorldDao worldDao = InMemoryWorldDao.getInstance();
 		
