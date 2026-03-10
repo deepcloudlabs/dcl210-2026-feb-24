@@ -59,7 +59,11 @@ public class Quiz10 {
             this.consumerId = consumerId;
         }
 
-        @Override
+		public int getConsumerId() {
+			return consumerId;
+		}
+
+		@Override
         public void run() {
             try {
                 for (int i = 1; i <= 5; i++) {
