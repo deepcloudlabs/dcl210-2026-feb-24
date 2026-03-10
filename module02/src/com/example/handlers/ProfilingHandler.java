@@ -50,6 +50,7 @@ public class ProfilingHandler implements InvocationHandler {
 		return new ProfileConfig(false, TimeUnit.NANOSECONDS);
 	}
 
-	private record ProfileConfig(boolean isProfiled, TimeUnit timeUnit) {
-	}
+}
+
+record ProfileConfig(boolean isProfiled, TimeUnit timeUnit) {
 }
