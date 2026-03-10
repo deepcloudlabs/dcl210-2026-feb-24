@@ -1,60 +1,33 @@
 package com.example.exercises;
 
-import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.example.domain.Director;
 import com.example.domain.Movie;
 import com.example.service.InMemoryMovieService;
 import com.example.service.MovieService;
 
+import java.util.Collection;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 /**
- * 
  * @author Binnur Kurt <binnur.kurt@gmail.com>
- *
  */
 public class Exercise1 {
-	private static final MovieService movieService = InMemoryMovieService.getInstance();
+    private static final MovieService movieService = InMemoryMovieService.getInstance();
 
-	public static void main(String[] args) {
-		// Find the number of movies of each director
-        final Collection<Movie> movies = movieService.findAllMovies();
-        // imperative programming: before java 8
-        System.err.println("Imperative Programming Style");
-        HashMap<Director,Long> directorMovieCount = new HashMap<>();
-        // external loop
-        for (var movie : movies) {
-           	// external loop
-        	    for (var director: movie.getDirectors()) {
-        	    	    directorMovieCount.merge(director, 1L, Long::sum);
-        	    }
-        }
-        // external loop
-        for (var entry: directorMovieCount.entrySet()) {
-        		System.out.println("%-32s: %2d".formatted(entry.getKey().getName(),entry.getValue()));
-        }
-        System.err.println("Functional Programming Style");
-        // declarative programming: functional programming after java 8+
-        // Higher-Order Function: functions accept parameters as function
-        // MapReduce Framework: filter, map, reduce, flatMap, distinct, min, max, count, collect,...
-        // immutability, function chain (design): HoF -> pipeline (runtime): stream
-        // lazy stream
-        // parallel stream -> ForkJoin Framework (java se 7)
-        Map<Director, Long> directorMovieFunctionalCount = 
-        // internal loop		
-        movies              							    // Collection<Movie> 
-              .stream()     								// Stream<Movie>
-              .parallel()
-              .map(Movie::getDirectors)                  // Stream<List<Director>>
-              .flatMap(List::stream)  				    // Stream<Director>
-              .collect(groupingBy(identity(),counting())); // Map<Director,Long>
-        directorMovieFunctionalCount.forEach((director,count) -> System.out.println("%-32s: %2d".formatted(director.getName(),count)));
-	}
+    public static void main(String[] args) {
+        // Find the number of movies of each director
+        final var movies = movieService.findAllMovies();
+        Map<String, Long> dirMovCounts =
+                movies.stream().map(Movie::getDirectors)
+                        .flatMap(Collection::stream)
+                        .collect(Collectors.groupingBy(
+                                        Director::getName,
+                                        Collectors.counting()
+                                )
+                        );
+        dirMovCounts.forEach(
+                (name, count) -> System.out.printf("%20s: %3d\n", name, count));
+    }
 
 }
