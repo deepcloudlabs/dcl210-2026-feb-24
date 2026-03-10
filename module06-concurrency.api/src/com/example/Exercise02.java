@@ -8,6 +8,9 @@ public class Exercise02 {
 		//                                      CPU -> multi-core: 
 		// 1. Multi-tasking
 		// 2. Parallel Programming
+		//     1) Pure Thread Programming
+		//     2) fork/join framework -> fork join pool: since jdk 7
+		//     3) parallel stream: since jdk 8
 		// Thread -> OS/Kernel -> System Resources -> Memory/Stack, CPU
 		//   I. CPU-Bound -> IVX -> Platform Thread
 		//  II. IO-Bound (Disk/Network IO) -> VX
@@ -29,7 +32,7 @@ public class Exercise02 {
 		// Thread Pooling: Executor Service, Executors
 		
 		// wait, notify, notifyAll
-		// Synchronizers: Semaphore,CountDown Latch,...
+		// Synchronizers: BlockingQueue, Semaphore, CountDown Latch, Cyclic Barrier, Phaser, ...
 		
 	}
 
