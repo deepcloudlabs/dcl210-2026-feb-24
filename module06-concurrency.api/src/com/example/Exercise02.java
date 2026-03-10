@@ -1,6 +1,7 @@
 package com.example;
 
 public class Exercise02 {
+	private static int x = 42;
 
 	public static void main(String[] args) {
 		// Thread Programming: Platform Thread: Stack (-Xss4m) -> Kernel
@@ -24,7 +25,6 @@ public class Exercise02 {
 		//  II. Multiple Process (Distributed Programming -> RMI)
 		// III. Multiple Process Multiple Thread  (Distributed Programming -> RMI)
 
-		int x = 42;
 		x++;
 		// Thread Safety: I. Lock-based (mutual exclusion)
 		//               II. Lock Free: Atomic variables
@@ -34,6 +34,10 @@ public class Exercise02 {
 		// wait, notify, notifyAll
 		// Synchronizers: BlockingQueue, Semaphore, CountDown Latch, Cyclic Barrier, Phaser, ...
 		
+	}
+
+	public static int getX() {
+		return x;
 	}
 
 }
