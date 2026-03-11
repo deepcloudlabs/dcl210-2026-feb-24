@@ -10,11 +10,7 @@ public class ListAllCommands {
 			Path path = Paths.get(command);
 			System.out.println(path.getFileName());
 		};
-		ProcessHandle.allProcesses()
-		             .filter(p -> p.info().command().isPresent())
-		             .map(p -> p.info().command().get())
-				     .distinct()
-				     .sorted()
-				     .forEach(printCommand);
+		ProcessHandle.allProcesses().filter(p -> p.info().command().isPresent()).map(p -> p.info().command().get())
+				.distinct().sorted().forEach(printCommand);
 	}
 }
