@@ -33,34 +33,13 @@ import jakarta.persistence.Table;
 @DynamicUpdate
 @DynamicInsert
 // JPA Query Language: JPQL
-@NamedQueries(
-	{ 
-	    @NamedQuery(name = "Country.findAll", query = "select c from Country c"),
-		@NamedQuery(name = "Country.findByContinent", 
-		    query = "select c from Country c where c.continent=:continent"),
-		@NamedQuery(name = "Country.findContinents", query = "select distinct(c.continent) from Country c ") 
-	}
-)
-@NamedEntityGraphs(
-	{
-		@NamedEntityGraph(
-				name = "Country.withCities", 
-				attributeNodes = {
-				    @NamedAttributeNode("cities")						
-				}),
-		@NamedEntityGraph(
-			    name = "Country.withCapitalAndCities",
-			    attributeNodes = {
-			        @NamedAttributeNode("capitalCity"),
-			        @NamedAttributeNode("cities")
-			    }
-			)
-	}
-)
-@JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "kod"
-)
+@NamedQueries({ @NamedQuery(name = "Country.findAll", query = "select c from Country c"),
+		@NamedQuery(name = "Country.findByContinent", query = "select c from Country c where c.continent=:continent"),
+		@NamedQuery(name = "Country.findContinents", query = "select distinct(c.continent) from Country c ") })
+@NamedEntityGraphs({ @NamedEntityGraph(name = "Country.withCities", attributeNodes = { @NamedAttributeNode("cities") }),
+		@NamedEntityGraph(name = "Country.withCapitalAndCities", attributeNodes = { @NamedAttributeNode("capitalCity"),
+				@NamedAttributeNode("cities") }) })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "kod")
 public class Country {
 	@Id
 	@Column(name = "code")
@@ -77,7 +56,7 @@ public class Country {
 	@JoinColumn(name = "capital")
 	@JsonManagedReference
 	private City capitalCity;
-	@OneToMany(mappedBy = "country",fetch = FetchType.LAZY )
+	@OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
 	@JsonManagedReference
 	private List<City> cities;
 

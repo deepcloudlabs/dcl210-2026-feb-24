@@ -23,20 +23,25 @@ public interface CountryRepository extends JpaRepository<Country, String>, JpaSp
 
 	@EntityGraph(value = "graph.Country.cities", type = EntityGraphType.FETCH)
 	Country findOneByKod(String code);
-	
+
 	@EntityGraph(value = "graph.Country.capital", type = EntityGraphType.FETCH)
 	@Query("select c from Country c where c.kod=:code")
 	Country gitGetir(String code);
-	
-	List<Country> findAllByContinent(String continent,Pageable page);
+
+	List<Country> findAllByContinent(String continent, Pageable page);
+
 	Country findTopByOrderByPopulation();
-	//@Query(nativeQuery = true, value = "select c from COUNTRY c where c.continent=:continent")
+
+	// @Query(nativeQuery = true, value = "select c from COUNTRY c where
+	// c.continent=:continent")
 	@Query("select c from Country c where c.continent=:continent")
-    List<Country> bulGetir(String continent);
-    
+	List<Country> bulGetir(String continent);
+
 	@EntityGraph(value = "graph.Country.cities", type = EntityGraphType.FETCH)
 	Page<Country> findByContinent(Pageable page, String continent);
-	List<Country> findByContinentAndPopulationBetween(String continent,long populationFrom,long populationTo);
+
+	List<Country> findByContinentAndPopulationBetween(String continent, long populationFrom, long populationTo);
+
 	Collection<Country> findTop10ByOrderByPopulationDesc();
 
 	Page<Country> findAll(Pageable page);

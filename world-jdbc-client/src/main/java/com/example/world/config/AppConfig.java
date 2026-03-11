@@ -16,6 +16,6 @@ public class AppConfig {
 
 	@Bean
 	JdbcClient jdbcClient(DataSource dataSource) {
-	    return JdbcClient.create(dataSource);
+		return JdbcClient.create(dataSource);
 	}
 }

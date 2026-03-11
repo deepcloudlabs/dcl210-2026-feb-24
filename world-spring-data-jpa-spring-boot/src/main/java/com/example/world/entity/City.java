@@ -23,10 +23,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "city")
 @Access(AccessType.FIELD)
-@JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "id"
-)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class City {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

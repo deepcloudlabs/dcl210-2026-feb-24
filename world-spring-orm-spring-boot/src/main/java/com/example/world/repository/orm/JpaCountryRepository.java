@@ -46,13 +46,13 @@ public class JpaCountryRepository implements CountryRepository {
 	public Country add(Country country) {
 		txTemplate.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
 		txTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
-		txTemplate.executeWithoutResult( status -> {
+		txTemplate.executeWithoutResult(status -> {
 			try {
 				String code = country.getKod();
 				Optional<Country> found = findOne(code);
 				if (found.isPresent())
 					throw new IllegalArgumentException("Country exists!");
-				entityManager.persist(country);				
+				entityManager.persist(country);
 			} catch (Exception e) {
 				status.setRollbackOnly();
 			}
@@ -86,9 +86,7 @@ public class JpaCountryRepository implements CountryRepository {
 		System.err.println("getByContinent(%s)".formatted(continent));
 		EntityGraph<?> graph = entityManager.getEntityGraph("Country.withCapitalAndCities");
 		return entityManager.createNamedQuery("Country.findByContinent", Country.class)
-				.setHint("jakarta.persistence.fetchgraph", graph)
-				.setParameter("continent", continent)
-				.getResultList();
+				.setHint("jakarta.persistence.fetchgraph", graph).setParameter("continent", continent).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")

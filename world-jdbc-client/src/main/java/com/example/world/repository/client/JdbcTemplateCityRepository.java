@@ -56,8 +56,7 @@ public class JdbcTemplateCityRepository implements CityRepository {
 
 	@Override
 	public Collection<City> findByCountryCode(String countryCode) {
-		return jdbcTemplate.query(SELECT_CITIES_BY_COUNTRYCODE,
-				new BeanPropertyRowMapper<City>(City.class),
+		return jdbcTemplate.query(SELECT_CITIES_BY_COUNTRYCODE, new BeanPropertyRowMapper<City>(City.class),
 				countryCode);
 	}
 

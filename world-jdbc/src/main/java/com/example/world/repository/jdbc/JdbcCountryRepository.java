@@ -41,8 +41,8 @@ public class JdbcCountryRepository implements CountryRepository {
 	private static final String DELETE_COUNTRY_BY_CODE = "delete from country where code=?";
 	private static final String ADD_COUNTRY = "insert into country(code,name,continent,population,surfaceArea) values(?,?,?,?,?)";
 	private static final String UPDATE_COUNTRY = "update country set population=? , surfaceArea=? where code=?";
-	
-	private final  DataSource dataSource;
+
+	private final DataSource dataSource;
 
 	public JdbcCountryRepository(DataSource dataSource) {
 		this.dataSource = dataSource;

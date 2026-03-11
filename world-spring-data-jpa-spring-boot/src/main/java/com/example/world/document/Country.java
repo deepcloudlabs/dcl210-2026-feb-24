@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Country {
 	@Id
 	private String id;
-	@Indexed(name = "countryname",unique = true)
+	@Indexed(name = "countryname", unique = true)
 	private String name;
 	private String continent;
 	@Indexed(name = "countrypopulation", direction = IndexDirection.DESCENDING)

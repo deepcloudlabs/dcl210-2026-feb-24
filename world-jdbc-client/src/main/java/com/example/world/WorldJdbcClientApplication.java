@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.world.repository.CountryRepository;
 
 @SpringBootApplication
-public class WorldJdbcClientApplication implements ApplicationRunner{
+public class WorldJdbcClientApplication implements ApplicationRunner {
 	private final CountryRepository countryRepository;
-	
+
 	public WorldJdbcClientApplication(CountryRepository countryRepository) {
 		this.countryRepository = countryRepository;
 	}
@@ -21,8 +21,7 @@ public class WorldJdbcClientApplication implements ApplicationRunner{
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		countryRepository.getByContinent("Asia")
-		                 .forEach(System.out::println);
+		countryRepository.getByContinent("Asia").forEach(System.out::println);
 	}
 
 }

@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import jakarta.persistence.EntityManagerFactory;
 
-
 /**
  * 
  * @author Binnur Kurt <binnur.kurt@gmail.com>
@@ -54,12 +53,12 @@ public class AppConfig {
 
 	@Bean
 	LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
-        var factoryBean = new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setDataSource(dataSource);
-        factoryBean.setPackagesToScan("com.example.world.entity");
-        var vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setShowSql(true);
-        factoryBean.setJpaVendorAdapter(vendorAdapter);
-        return factoryBean;
+		var factoryBean = new LocalContainerEntityManagerFactoryBean();
+		factoryBean.setDataSource(dataSource);
+		factoryBean.setPackagesToScan("com.example.world.entity");
+		var vendorAdapter = new HibernateJpaVendorAdapter();
+		vendorAdapter.setShowSql(true);
+		factoryBean.setJpaVendorAdapter(vendorAdapter);
+		return factoryBean;
 	}
 }

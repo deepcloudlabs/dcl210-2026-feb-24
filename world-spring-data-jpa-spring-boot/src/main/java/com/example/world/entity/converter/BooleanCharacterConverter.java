@@ -15,7 +15,8 @@ public class BooleanCharacterConverter implements AttributeConverter<Boolean, St
 
 	@Override
 	public String convertToDatabaseColumn(Boolean value) {
-		if (Objects.isNull(value)) return "F";
+		if (Objects.isNull(value))
+			return "F";
 		return value ? "T" : "F";
 	}
 

@@ -18,13 +18,13 @@ import com.example.world.repository.CountryRepository;
 @CrossOrigin
 public class WorldRestController {
 	private final CountryRepository countryRepository;
-	
+
 	public WorldRestController(CountryRepository countryRepository) {
 		this.countryRepository = countryRepository;
 	}
 
-	@GetMapping(params= {"continent"})
-	public Collection<Country> getCountries(@RequestParam String continent){
+	@GetMapping(params = { "continent" })
+	public Collection<Country> getCountries(@RequestParam String continent) {
 		System.err.println("getCountries(%s)".formatted(continent));
 		return countryRepository.getByContinent(continent);
 	}

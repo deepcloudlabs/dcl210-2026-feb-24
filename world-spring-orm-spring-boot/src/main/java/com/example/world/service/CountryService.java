@@ -28,11 +28,11 @@ public class CountryService {
 			countryRepository.update(c);
 		});
 	}
+
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void changePopulationByCOntinent(String continent, long change) {
-		
-		countryRepository.getByContinent(continent)
-		.forEach(c -> {
+
+		countryRepository.getByContinent(continent).forEach(c -> {
 			c.setPopulation(c.getPopulation() + change);
 			countryRepository.update(c);
 		});

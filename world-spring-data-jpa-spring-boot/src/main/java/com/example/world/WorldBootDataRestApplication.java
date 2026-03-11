@@ -42,11 +42,9 @@ public class WorldBootDataRestApplication implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		countryRepository.findTop10ByOrderByPopulationDesc()
-				         .forEach(System.out::println);
+		countryRepository.findTop10ByOrderByPopulationDesc().forEach(System.out::println);
 		System.err.println("From mongodb:");
-		mongoCountryRepository.findTop10ByOrderByPopulationDesc()
-		                      .forEach(System.err::println);
+		mongoCountryRepository.findTop10ByOrderByPopulationDesc().forEach(System.err::println);
 		System.err.println("Done.");
 		Specification<Country> asianHighPopulated = (root, _, criteriaBuilder) -> {
 			return criteriaBuilder.and(criteriaBuilder.gt(root.get("population"), 100_000_000),

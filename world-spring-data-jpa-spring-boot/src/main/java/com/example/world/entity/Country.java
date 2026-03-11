@@ -33,21 +33,15 @@ import jakarta.persistence.Table;
 @Table(name = "Country")
 @DynamicUpdate
 @DynamicInsert
-@NamedEntityGraphs(
-	{
+@NamedEntityGraphs({
 		@NamedEntityGraph(name = "graph.Country.cities", attributeNodes = @NamedAttributeNode(value = "cities", subgraph = "cities"), subgraphs = @NamedSubgraph(name = "cities", attributeNodes = @NamedAttributeNode("country"))),
 		@NamedEntityGraph(name = "graph.Country.citylangs", attributeNodes = {
 				@NamedAttributeNode(value = "cities", subgraph = "cities"),
 				@NamedAttributeNode(value = "languages", subgraph = "languages") }, subgraphs = {
 						@NamedSubgraph(name = "cities", attributeNodes = @NamedAttributeNode("country")),
 						@NamedSubgraph(name = "languages", attributeNodes = @NamedAttributeNode("country")) }),
-		@NamedEntityGraph(name = "graph.Country.languages", attributeNodes = @NamedAttributeNode(value = "languages", subgraph = "languages"), subgraphs = @NamedSubgraph(name = "languages", attributeNodes = @NamedAttributeNode("country"))) 
-	}
-)
-@JsonIdentityInfo(
-		generator = ObjectIdGenerators.PropertyGenerator.class,
-		property = "kod"
-)
+		@NamedEntityGraph(name = "graph.Country.languages", attributeNodes = @NamedAttributeNode(value = "languages", subgraph = "languages"), subgraphs = @NamedSubgraph(name = "languages", attributeNodes = @NamedAttributeNode("country"))) })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "kod")
 public class Country {
 	@Id
 	@Column(name = "code")

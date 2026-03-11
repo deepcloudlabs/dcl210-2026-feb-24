@@ -57,10 +57,7 @@ public class JdbcTemplateCountryRepository implements CountryRepository {
 	}
 
 	public Country add(Country country) {
-		int rowsAffected = jdbcTemplate.update(INSERT_COUNTRY, 
-				new Object[] { 
-						country.getCode(), 
-						country.getName(),
+		int rowsAffected = jdbcTemplate.update(INSERT_COUNTRY, new Object[] { country.getCode(), country.getName(),
 				country.getContinent(), country.getPopulation(), country.getSurfaceArea() });
 		System.err.println(String.format("%d rows affected.", rowsAffected));
 		return country;

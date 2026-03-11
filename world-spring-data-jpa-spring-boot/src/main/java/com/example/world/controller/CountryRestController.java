@@ -46,9 +46,9 @@ public class CountryRestController {
 	// http://localhost:9001/world/api/countries
 	// ?continent=Asia&size=2&no=11
 	// http://localhost:9100/world/api/countries?continent=Asia
-	@GetMapping(params= {"continent"})
+	@GetMapping(params = { "continent" })
 	public Collection<Country> getAllByContinent(@RequestParam String continent) {
-		return countryRepository.findByContinent(PageRequest.of(0, 20),continent).getContent();
+		return countryRepository.findByContinent(PageRequest.of(0, 20), continent).getContent();
 	}
 
 	@PostMapping
@@ -56,14 +56,12 @@ public class CountryRestController {
 		countryRepository.save(country);
 		return country;
 	}
+
 	@Transactional
-	@PutMapping(params= {"continent","increment"})
-	public String updateCountryPopulation(
-			@RequestParam String continent,
-			@RequestParam int increment) {
+	@PutMapping(params = { "continent", "increment" })
+	public String updateCountryPopulation(@RequestParam String continent, @RequestParam int increment) {
 		worldService.increasePopulation(increment, continent);
 		return "Success";
 	}
-	
-	
+
 }

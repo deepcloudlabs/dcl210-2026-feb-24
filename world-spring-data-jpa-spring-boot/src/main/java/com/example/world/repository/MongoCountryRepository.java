@@ -18,10 +18,14 @@ import com.example.world.document.Country;
  */
 public interface MongoCountryRepository extends MongoRepository<Country, String> {
 	Slice<Country> getByContinent(Pageable page, String continent);
-	List<Country> findByContinentAndPopulationBetween(String continent,long populationFrom,long populationTo);
+
+	List<Country> findByContinentAndPopulationBetween(String continent, long populationFrom, long populationTo);
+
 	Collection<Country> findTop10ByOrderByPopulationDesc();
+
 	Page<Country> findAll(Pageable page);
+
 	@Query("{continent: ?1, population: {$gt: ?2, $lt: ?3}}")
-	List<Country> kitaUlkeleriniGetir(Pageable page,String continent,long populationFrom,long populationTo);
+	List<Country> kitaUlkeleriniGetir(Pageable page, String continent, long populationFrom, long populationTo);
 
 }
