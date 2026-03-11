@@ -13,7 +13,7 @@ public class FileAttributes {
 
     public static void main(String[] args) {
         DosFileAttributes attrs = null;
-        Path file = Paths.get("c:/tmp/flags17.txt");
+        Path file = Paths.get("c:/tmp/Exercise01.java");
         try {
             attrs = Files.readAttributes(file, DosFileAttributes.class);
         } catch (IOException e) {

@@ -141,7 +141,7 @@ public class WatchDir {
     }
 
     public static void main(String[] args) throws IOException {
-        Path dir = Paths.get("i:/var");
+        Path dir = Paths.get("c:/tmp");
         new WatchDir(dir, true).processEvents();
     }
 }
