@@ -14,6 +14,7 @@ import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -25,6 +26,7 @@ import javax.crypto.SecretKey;
  */
 public class RSATest {
 	public static void main(String[] args) {
+		System.out.println(Arrays.toString(args));
 		try {
 			if (args[0].equals("-genkey")) {
 				KeyPairGenerator pairgen = KeyPairGenerator.getInstance("RSA");
