@@ -21,7 +21,8 @@ public class KillProcess {
                         Path path = Paths.get(cmd.get());
                         System.out.println(path.getFileName());
                         return Arrays.stream(args)
-                               .anyMatch( arg -> path.getFileName().toString().equals(arg) );
+                        		.peek(System.out::println)
+                               .anyMatch( arg -> path.getFileName().toString().contains(arg) );
                     }
                     return false;
                 };
